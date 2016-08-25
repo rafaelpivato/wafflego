@@ -15,6 +15,8 @@ appear in the dashboard.
 
 """
 
+import sys
+
 from .tools import Spoon
 from .tools import main_done_selector
 
@@ -51,6 +53,9 @@ def dump_release(release, children):
         print ''
 
 
-if __name__ == '__main__':
-    import sys
+def main():
     dump_cards(*sys.argv[1:])
+
+
+if __name__ == '__main__':
+    main()

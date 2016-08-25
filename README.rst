@@ -16,3 +16,10 @@ Cards are closed and dragged into Done column. When a release is done,
 you create a card tagged with `release`. All cards below that, until
 preceding `release` card, will be added as part of release notes
 within the card itself.
+
+
+Running
+=======
+
+$ pip install -e .
+$ wafflego_dump <my-waffle-bearer-token> rafaelpivato/wafflego
