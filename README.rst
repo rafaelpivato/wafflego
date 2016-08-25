@@ -1,7 +1,7 @@
 WaffleGo
 ========
 
-> Unpretentious and modest script tools for Waffle.io release notes
+    *Unpretentious and modest script tools for Waffle.io release notes*
 
 Scripts and code found here have one main goal: create release notes
 on based on Waffle.io closed cards. It is based, and depends, on a

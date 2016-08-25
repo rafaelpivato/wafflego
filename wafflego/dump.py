@@ -16,21 +16,41 @@ appear in the dashboard.
 """
 
 from .tools import Spoon
+from .tools import main_done_selector
 
 
-def dump_cards(bearer, repo, selector):
-    """Print cards to the standard output that pass the given selector."""
+def dump_cards(bearer, repo):
+    """Print release cards and their children."""
     spoon = Spoon(bearer, repo)
-    in_release = []
-    for card in spoon.iter_cards(selector):
+    release = None
+    children = None
+    for card in spoon.iter_cards(main_done_selector):
         if card.has_label('release'):
-            dump_release(card, in_release)
+            dump_release(release, children)
+            release = card
+            children = []
         else:
-            in_release.append(card)
+            if release:
+                children.append(card)
+            else:
+                number = '[#{0}]'.format(card.number)
+                print number, card.title
+    else:
+        dump_release(release, children)
 
 
 def dump_release(release, children):
     """Prints cards in release card."""
-    print '[RELEASE]', release.title
-    for card in children:
-        print '  - ', card.title
+    if release is not None:
+        release_number = '[#{0}]'.format(release.number)
+        print ''
+        print release_number, release.title.upper()
+        for card in children:
+            number = '(#{0})'.format(card.number)
+            print '  -', number, card.title
+        print ''
+
+
+if __name__ == '__main__':
+    import sys
+    dump_cards(*sys.argv[1:])
